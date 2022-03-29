@@ -1,6 +1,5 @@
-name: Push-run-in-EC2
+name: myDemo workflow
 
-# Trigger deployment only on push to master branch
 on:
   push:
     branches:
@@ -8,20 +7,19 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to EC2 on master branch push and run some commands
+    name: connect to EC2 by master branch push and run some commands
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout the files
         uses: actions/checkout@v2
 
-      - name: Deploy to DemoServer 1
-        uses: easingthemes/ssh-deploy@main
+      - name: connect and execute a sample command in EC2 instance       
         env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: ${{ secrets.TARGET_DIR }}
-      - name: Run tests
+          TARGET: ${{ secrets.TARGET_DIR }}        
         run: |
-          whoami && pwd && uname -a
+          echo "$SSH_PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${REMOTE_USER}@${REMOTE_HOST} 'ls ${TARGET} && whoami && pwd && uname -a'
