@@ -22,4 +22,6 @@ jobs:
           TARGET: ${{ secrets.TARGET_DIR }}        
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${REMOTE_USER}@${REMOTE_HOST} 'ls ${TARGET} && whoami && pwd && uname -a'
+          ssh -o StrictHostKeyChecking=no -i private_key ${REMOTE_USER}@${REMOTE_HOST} 'ls ${TARGET} && uname -a'
+          scp -i private_key hello.sh ${REMOTE_USER}@${REMOTE_HOST}:${TARGET}
+          ssh -o StrictHostKeyChecking=no -i private_key ${REMOTE_USER}@${REMOTE_HOST} './hello.sh'
