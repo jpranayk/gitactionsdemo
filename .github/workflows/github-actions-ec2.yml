@@ -24,4 +24,4 @@ jobs:
           TARGET: ${{ secrets.TARGET_DIR }}
       - name: Run tests
         run: |
-          whoami
+          whoami && pwd && uname -a
