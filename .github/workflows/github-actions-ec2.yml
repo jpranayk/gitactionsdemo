@@ -23,5 +23,5 @@ jobs:
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key && chmod 600 private_key
           ssh -o StrictHostKeyChecking=no -i private_key ${REMOTE_USER}@${REMOTE_HOST} 'ls ${TARGET} && uname -a'
-          scp -i private_key hello.sh ${REMOTE_USER}@${REMOTE_HOST}:${TARGET}
-          ssh -o StrictHostKeyChecking=no -i private_key ${REMOTE_USER}@${REMOTE_HOST} './hello.sh'
+          scp -v -i private_key hello.sh ${REMOTE_USER}@${REMOTE_HOST}:${TARGET}
+          ssh -o StrictHostKeyChecking=no -i private_key ${REMOTE_USER}@${REMOTE_HOST} 'ls && chmod +x hello.sh &&./hello.sh'
