@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Build maven app') {
             steps {
-                checkout scm
+                sh "mvn clean"
             }
         }
            stage('Building docker image') { 
