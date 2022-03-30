@@ -18,7 +18,7 @@ pipeline {
         }
       stage('demo shellscript') {
             steps {
-                sh './hello.sh'
+                sh 'chmod +x hello.sh && ./hello.sh'
             }
         }
     }
