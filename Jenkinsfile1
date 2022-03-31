@@ -23,7 +23,7 @@ pipeline {
             steps { 
                 script { 
                    // dockerImage = docker.build mydockerhub + ":$BUILD_NUMBER" 
-                   sh "sudo docker build -t charanavvari/myrepo:${BUILD_NUMBER} . "
+                   sh "docker build -t charanavvari/myrepo:${BUILD_NUMBER} . "
                 }
             } 
         }
