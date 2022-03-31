@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        mydockerhub = "charanavvari/myrepo"
+        mydockerhub = "charanavvari/mydemo"
         dockerCredentialID = 'dockerhub_jenkins_creds_id'
         dockerImage = ''
     }
