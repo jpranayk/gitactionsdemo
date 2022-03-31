@@ -16,14 +16,14 @@ pipeline {
             steps {
                 sh "mvn package -B test"
                 sh "ls -l target"
-                sh "mv target/SpringBootLogger-0.0.1-SNAPSHOT.jar . "
+                //sh "mv target/SpringBootLogger-0.0.1-SNAPSHOT.jar . "
             }
         }
            stage('Building docker image') { 
             steps { 
                 script { 
-                   // dockerImage = docker.build mydockerhub + ":$BUILD_NUMBER" 
-                   sh "docker build -t charanavvari/myrepo:${BUILD_NUMBER} . "
+                    dockerImage = docker.build mydockerhub + ":$BUILD_NUMBER" 
+                  // sh "docker build -t charanavvari/myrepo:${BUILD_NUMBER} . "
                 }
             } 
         }

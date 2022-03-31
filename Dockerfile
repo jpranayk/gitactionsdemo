@@ -1,3 +1,4 @@
-FROM maven:3.5-jdk-8-alpine
-
-RUN mvn 
+FROM openjdk:8u111-jdk-alpine
+VOLUME /tmp
+ADD target/SpringBootLogger-0.0.1-SNAPSHOT.jar app.jar
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
