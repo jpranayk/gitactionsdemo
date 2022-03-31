@@ -14,7 +14,8 @@ pipeline {
         }
         stage('Build maven app') {
             steps {
-                sh "mvn clean"
+                sh "mvn package -B test"
+                sh "ls -l target"
             }
         }
            stage('Building docker image') { 
