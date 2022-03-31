@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        mydockerhub = "mydockerhubname/myrepo"
+        mydockerhub = "charanavvari/myrepo"
         dockerCredentialID = 'dockerhub_jenkins_creds_id'
         dockerImage = ''
     }
@@ -16,6 +16,7 @@ pipeline {
             steps {
                 sh "mvn package -B test"
                 sh "ls -l target"
+                sh "mv target/SpringBootLogger-0.0.1-SNAPSHOT.jar . "
             }
         }
            stage('Building docker image') { 
