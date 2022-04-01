@@ -31,13 +31,13 @@ pipeline {
            stage('Run docker image') { 
             steps { 
                 script { 
-         /*
-	 	   dockerImage.inside{
+         
+	 	   dockerImage.inside('--entrypoint=netstat -aux|grep 9090'){
 		    	sh "netstat -aux | grep 9090"
 
 		    }
-		    */
-		    sh "docker run -it --entrypoint='netstat -aux|grep 9090' ${mydockerhub} "
+		    
+		    //sh "docker run -it --entrypoint='netstat -aux|grep 9090' ${mydockerhub} "
 
                 }
             } 
