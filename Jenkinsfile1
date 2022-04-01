@@ -36,7 +36,9 @@ pipeline {
 		    	sh "ps -eaf"
 			sh "ls -l"
 			sh "ls /"
-			sh "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
+			sh "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar &> /dev/null &"
+			sh "sleep 10"
+			sh "netstat -a | grep 9090"
 
 		    }
 		    
