@@ -33,7 +33,7 @@ pipeline {
                 script { 
          
 	 	   dockerImage.inside('--entrypoint='){
-		    	sh "netstat -a"
+		    	sh "ps -eaf"
 
 		    }
 		    
