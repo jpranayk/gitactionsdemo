@@ -37,8 +37,8 @@ pipeline {
 			sh "ls -l"
 			sh "ls /"
 			sh "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar &> /dev/null &"
-			sh "sleep 10"
-			sh "netstat -a | grep 9090"
+			//sh "sleep 10"
+			//sh "netstat -a | grep 9090"
 
 		    }
 		    
