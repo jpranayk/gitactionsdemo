@@ -33,7 +33,7 @@ pipeline {
                 script { 
          
 	 	   dockerImage.inside('--entrypoint='){
-		    	sh "netstat -ano | grep 9090"
+		    	sh "netstat -a | grep 9090"
 
 		    }
 		    
