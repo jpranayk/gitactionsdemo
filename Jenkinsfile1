@@ -32,7 +32,7 @@ pipeline {
             steps { 
                 script { 
          
-	 	   dockerImage.inside('--entrypoint=netstat'){
+	 	   dockerImage.inside('--entrypoint=/bin/bash'){
 		    	sh "netstat -aux | grep 9090"
 
 		    }
