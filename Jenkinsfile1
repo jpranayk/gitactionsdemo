@@ -34,6 +34,9 @@ pipeline {
          
 	 	   dockerImage.inside('--entrypoint='){
 		    	sh "ps -eaf"
+			sh "ls -l"
+			sh "ls /"
+			sh "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
 
 		    }
 		    
