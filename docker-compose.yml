@@ -1,12 +1,12 @@
 services:
   app1:
-    image: petstore:latest
-    hostname: petstore01
+    image: appserver1/mydemo:latest
+    hostname: server01
     ports:
       - "5001:5000"
   app2:
-    image: petstore:latest
-    hostname: petstore01
+    image: appserver2/mydemo:latest
+    hostname: server02
     ports:
       - "5002:5000"
   nginx:
