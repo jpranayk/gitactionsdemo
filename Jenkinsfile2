@@ -1,0 +1,73 @@
+pipeline {
+    environment {
+        mydockerhub = "appserver1/mydemo"
+        dockerCredentialID = 'dockerhub_jenkins_creds_id'
+        dockerImage = ''
+    }
+    agent { label 'server1' } 
+
+    stages {
+        stage('checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Build maven app1') {
+            steps {
+                sh "mvn package -B test"
+                sh "ls -l target"
+            }
+        }
+           stage('Building docker image1') { 
+            steps { 
+                script { 
+                    dockerImage = docker.build mydockerhub
+                }
+            } 
+        }
+        stage('Build maven app2') {
+            steps {
+	    	//do some modification to src code here
+                sh "mvn package -B test"
+                sh "ls -l target"
+            }
+
+        }
+           stage('Building docker image2') { 
+            steps { 
+                script { 
+                    dockerImage = docker.build appserver2/mydemo
+                }
+            } 
+        }
+           stage('Run docker image') { 
+            steps { 
+                script { 
+         
+	 	   dockerImage.inside('--entrypoint='){
+			sh "ls -l"
+
+		    }
+		    
+
+                }
+            } 
+        }
+           stage('Load balancing Two apps') { 
+            steps { 
+                script { 
+                    sh "docker-compose up"
+                }
+            } 
+        }
+        stage('Deploy docker image') { 
+            steps { 
+                script { 
+                    docker.withRegistry( '', dockerCredentialID ) { 
+                        dockerImage.push() 
+                    }
+                } 
+            }
+        } 
+    }
+}
