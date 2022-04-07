@@ -18,3 +18,7 @@ services:
       - app2
     ports:
       - "8080:80"
+networks:
+  default:
+    driver: bridge
+    name: app1
