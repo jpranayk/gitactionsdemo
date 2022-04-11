@@ -17,5 +17,5 @@ services:
       - app1
       - app2
     ports:
-      - "9090:80"
+      - "9000:80"
 
