@@ -31,6 +31,7 @@ pipeline {
 		sh 'sed -e 's/Hello World!!/Hello World!! from Server2/1' src/main/java/com/infotech/app/SpringBootLoggerApplication.java'
                 sh "mvn package -B test"
                 sh "ls -l target"
+		sh 'curl -f http://35.168.249.146:8080/'
             }
 
         }
