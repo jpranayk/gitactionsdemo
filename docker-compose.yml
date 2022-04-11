@@ -17,7 +17,7 @@ services:
       - app1
       - app2
     ports:
-      - "8080:80"
+      - "9090:80"
 networks:
   default:
     driver: bridge
