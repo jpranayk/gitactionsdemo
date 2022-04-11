@@ -57,7 +57,7 @@ pipeline {
             steps { 
                 script { 
                     sh "docker-compose up -d"
-		    sh "sleep 10"
+		    sh "sleep 30"
 		    sh 'curl -f http://localhost:9000/'
                 }
             } 
