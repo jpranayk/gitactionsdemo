@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        mydockerhub = "appserver1/mydemo"
+        mydockerhub = "charanavvari/demoone"
         dockerCredentialID = 'dockerhub_jenkins_creds_id'
         dockerImage = ''
     }
@@ -36,7 +36,7 @@ pipeline {
            stage('Building docker image2') { 
             steps { 
                 script { 
-                    dockerImage = docker.build "appserver2/mydemo"
+                    dockerImage = docker.build "charanavvari/demotwo"
                 }
             } 
         }
