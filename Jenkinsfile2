@@ -4,8 +4,8 @@ pipeline {
         dockerCredentialID = 'dockerhub_jenkins_creds_id'
         dockerImage = ''
     }
-    agent { label 'server1' } 
-
+    //agent { label 'server1' } 
+    agent any
     stages {
         stage('checkout') {
             steps {
@@ -58,7 +58,7 @@ pipeline {
                 script { 
                     sh "docker-compose up -d"
 		    sh "sleep 10"
-		    sh 'curl -f http://35.168.249.146:8080/'
+		    sh 'curl -f http://localhost:9090/'
                 }
             } 
         }
