@@ -4,8 +4,8 @@ pipeline {
         dockerCredentialID = 'dockerhub_jenkins_creds_id'
         dockerImage = ''
     }
-    //agent { label 'server1' } 
-    agent any
+    agent { label 'server2' } 
+    //agent any
     stages {
         stage('checkout') {
             steps {
