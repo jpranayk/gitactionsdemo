@@ -28,7 +28,7 @@ pipeline {
         stage('Build maven app2') {
             steps {
 	    	//do some modification to src code here
-		sh '''sed -e 's/Hello World!!/Hello World!! from Server2/1' src/main/java/com/infotech/app/SpringBootLoggerApplication.java'''
+		sh '''sed -i 's/Hello World!!/Hello World!! from Server2/1' src/main/java/com/infotech/app/SpringBootLoggerApplication.java'''
                 sh "mvn package -B test"
                 sh "ls -l target"
             }
