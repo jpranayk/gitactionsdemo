@@ -56,7 +56,14 @@ pipeline {
            stage('Load balancing Two apps') { 
             steps { 
                 script { 
-                    sh "docker-compose up"
+                    sh "docker-compose up -d"
+                }
+            } 
+        }
+	 stage('Removing container apps') { 
+            steps { 
+                script { 
+                    sh "docker-compose down"
                 }
             } 
         }
