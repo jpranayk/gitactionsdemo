@@ -19,4 +19,7 @@ services:
       - app2
     ports:
       - "9000:80"
-
+networks:
+  default:
+    driver: bridge
+    name: loadbalanceapps
