@@ -63,13 +63,7 @@ pipeline {
                 }
             } 
         }
-	 stage('Removing container apps') { 
-            steps { 
-                script { 
-                    sh "docker-compose down"
-                }
-            } 
-        }
+	 
         stage('Deploy docker image') { 
             steps { 
                 script { 
