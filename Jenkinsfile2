@@ -66,7 +66,7 @@ pipeline {
 	 stage('Removing container apps') { 
             steps { 
                 script { 
-                    sh "docker-compose down"
+                    //sh "docker-compose down"
                 }
             } 
         }
