@@ -24,6 +24,6 @@ public class SpringBootLoggerApplication {
 	
 	@RequestMapping("/")
 	public String welcome(){
-		return "Hello World!!";
+		return "Hello World testing!!";
 	}
 }
