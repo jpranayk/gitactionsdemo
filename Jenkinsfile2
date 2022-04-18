@@ -25,6 +25,15 @@ pipeline {
                 }
             } 
         }
+	  stage('Deploy docker image1') { 
+            steps { 
+                script { 
+                    docker.withRegistry( '', dockerCredentialID ) { 
+                        dockerImage.push() 
+                    }
+                } 
+            }
+        }
         stage('Build maven app2') {
             steps {
 	    	//do some modification to src code here
@@ -53,6 +62,7 @@ pipeline {
                 }
             } 
         }
+	/*
            stage('Load balancing Two apps') { 
             steps { 
                 script { 
@@ -63,8 +73,8 @@ pipeline {
                 }
             } 
         }
-	 
-        stage('Deploy docker image') { 
+	 */
+        stage('Deploy docker image2') { 
             steps { 
                 script { 
                     docker.withRegistry( '', dockerCredentialID ) { 
@@ -72,6 +82,7 @@ pipeline {
                     }
                 } 
             }
-        } 
+        }
+	
     }
 }
