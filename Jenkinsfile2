@@ -66,6 +66,7 @@ pipeline {
            stage('Load balancing Two apps') { 
             steps { 
                 script { 
+		// docker-compose pull
                     sh "docker-compose up -d"
 		    sh "sleep 30"
 		    sh 'curl -f http://localhost:9000/'
