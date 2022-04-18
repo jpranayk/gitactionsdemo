@@ -34,17 +34,16 @@ pipeline {
                 } 
             }
         }
-        
-           stage('Run docker image') { 
+         stage('Running docker containers') { 
             steps { 
                 script { 
-         
-	 	   dockerImage.inside('--entrypoint='){
-			sh "ls -l"
-
-		  }
+		    sh "docker pull ${mydockerhub}"
+		    sh "docker stop testingapp"
+		    sh "docker rm -f testingapp"
+                    sh " docker run -itd -p 5001:9090 --name testingapp ${mydockerhub}"
+		    //sh "docker-compose up -d"
                 }
-            }
-	 }
+            } 
+        }
 }
 }
