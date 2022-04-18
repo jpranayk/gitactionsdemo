@@ -34,21 +34,7 @@ pipeline {
                 } 
             }
         }
-        stage('Build maven app2') {
-            steps {
-	    	//do some modification to src code here
-		sh '''sed -i 's/Hello World!!/Hello World!! from Server2/1' src/main/java/com/infotech/app/SpringBootLoggerApplication.java'''
-                sh "mvn package -B test"
-                sh "ls -l target"
-            }
-        }
-           stage('Building docker image2') { 
-            steps { 
-                script { 
-                    dockerImage = docker.build "charanavvari/demotwo"
-                }
-            } 
-        }
+        
            stage('Run docker image') { 
             steps { 
                 script { 
@@ -60,30 +46,6 @@ pipeline {
 		    
 
                 }
-            } 
-        }
-	/*
-           stage('Load balancing Two apps') { 
-            steps { 
-                script { 
-		// docker-compose pull
-                    sh "docker-compose up -d"
-		    sh "sleep 30"
-		    sh 'curl -f http://localhost:9000/'
-		    sh 'curl -f http://localhost:5002/'
-                }
-            } 
-        }
-	 */
-        stage('Deploy docker image2') { 
-            steps { 
-                script { 
-                    docker.withRegistry( '', dockerCredentialID ) { 
-                        dockerImage.push() 
-                    }
-                } 
             }
-        }
-	
     }
 }
