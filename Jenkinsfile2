@@ -38,9 +38,10 @@ pipeline {
             steps { 
                 script { 
 		    sh "docker pull ${mydockerhub}"
-		    sh "docker stop testingapp"
-		    sh "docker rm -f testingapp"
+		    sh "docker stop testingapp testingapp2"
+		    sh "docker rm -f testingapp testingapp2"
                     sh " docker run -itd -p 5001:9090 --name testingapp ${mydockerhub}"
+		    sh " docker run -itd -p 5002:9090 --name testingapp2 ${mydockerhub}"
 		    //sh "docker-compose up -d"
                 }
             } 
