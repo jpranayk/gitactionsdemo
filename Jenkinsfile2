@@ -9,6 +9,7 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
+           stage('Building docker image1') { 
                 checkout scm
             }
         }
@@ -18,7 +19,6 @@ pipeline {
                 sh "ls -l target"
             }
         }
-           stage('Building docker image1') { 
             steps { 
                 script { 
                     dockerImage = docker.build mydockerhub
@@ -39,10 +39,10 @@ pipeline {
                 script { 
 		
 		    sh "docker pull ${mydockerhub}"
-		    sh "docker stop testingapp testingapp2 || echo 'no apps found'"
-		    sh "docker rm -f testingapp testingapp2 || echo 'no apps found'"
-                    sh " docker run -itd -p 5001:9090 --name testingapp --hostname server01 ${mydockerhub}"
-		    sh " docker run -itd -p 5002:9090 --name testingapp2 --hostname server02 ${mydockerhub}"
+		    sh "docker stop testingapp1 testingapp2 || echo 'no apps found'"
+		    sh "docker rm -f testingapp1 testingapp2 || echo 'no apps found'"
+                    sh " docker run -itd --net sample --name testingapp1 --hostname server01 ${mydockerhub}"
+		    sh " docker run -itd --net sample --name testingapp2 --hostname server02 ${mydockerhub}"
 		    //sh "docker-compose up -d"
                 }
             } 
