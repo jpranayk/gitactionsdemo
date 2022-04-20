@@ -8,7 +8,7 @@ pipeline {
     //agent any
     stages {
         stage('checkout') {
-            steps {
+      
            stage('Building docker image1') { 
                 checkout scm
             }
