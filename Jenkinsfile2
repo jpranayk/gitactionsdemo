@@ -8,8 +8,8 @@ pipeline {
     //agent any
     stages {
         stage('checkout') {
-      
-           stage('Building docker image1') { 
+      		steps{
+           
                 checkout scm
             }
         }
@@ -19,6 +19,7 @@ pipeline {
                 sh "ls -l target"
             }
         }
+	stage('Building docker image1') { 
             steps { 
                 script { 
                     dockerImage = docker.build mydockerhub
