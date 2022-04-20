@@ -37,11 +37,12 @@ pipeline {
          stage('Running docker containers') { 
             steps { 
                 script { 
+		
 		    sh "docker pull ${mydockerhub}"
 		    sh "docker stop testingapp testingapp2 || echo 'no apps found'"
 		    sh "docker rm -f testingapp testingapp2 || echo 'no apps found'"
-                    sh " docker run -itd -p 5001:9090 --name testingapp ${mydockerhub}"
-		    sh " docker run -itd -p 5002:9090 --name testingapp2 ${mydockerhub}"
+                    sh " docker run -itd -p 5001:9090 --name testingapp --hostname server01 ${mydockerhub}"
+		    sh " docker run -itd -p 5002:9090 --name testingapp2 --hostname server02 ${mydockerhub}"
 		    //sh "docker-compose up -d"
                 }
             } 
