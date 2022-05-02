@@ -4,7 +4,7 @@ pipeline {
         dockerCredentialID = 'dockerhub_jenkins_creds_id'
         dockerImage = ''
     }
-    agent { label 'server2' } 
+    agent { label 'mydemoserver' } 
     //agent any
     stages {
         stage('checkout') {
@@ -42,8 +42,8 @@ pipeline {
 		    sh "docker pull ${mydockerhub}"
 		    sh "docker stop testingapp1 testingapp2 || echo 'no apps found'"
 		    sh "docker rm -f testingapp1 testingapp2 || echo 'no apps found'"
-                    sh " docker run -itd --net sample --name testingapp1 --hostname server01 ${mydockerhub}"
-		    sh " docker run -itd --net sample --name testingapp2 --hostname server02 ${mydockerhub}"
+                    sh " docker run -itd --net sample --name testingapp1 --hostname container01 ${mydockerhub}"
+		    sh " docker run -itd --net sample --name testingapp2 --hostname container02 ${mydockerhub}"
 		    //sh "docker-compose up -d"
                 }
             } 
