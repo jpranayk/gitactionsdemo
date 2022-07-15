@@ -5,7 +5,10 @@ pipeline {
         dockerImage = ''
     }
     agent { label 'mydemoserver' } 
-    //agent any
+    options {
+        office365ConnectorWebhooks([
+            [name: "Office 365", url: "${MY_URL_WEBHOOK}", notifyBackToNormal: true, notifyFailure: true, notifyRepeatedFailure: true, notifySuccess: true, notifyAborted: true]
+        ])
     stages {
         stage('checkout') {
       		steps{
