@@ -1,0 +1,58 @@
+pipeline {
+    environment {
+        mydockerhub = "charanavvari/demoone"
+        dockerCredentialID = 'dockerhub_jenkins_creds_id'
+        dockerImage = ''
+    }
+    agent { label 'mydemoserver' } 
+    //agent any
+    stages {
+        stage('checkout') {
+      		steps{
+           
+                checkout scm
+            }
+        }
+        stage('Build maven app1') {
+            steps {
+                sh "mvn package -B test"
+                sh "ls -l target"
+            }
+        }
+	stage('Building docker image') { 
+            steps { 
+                script { 
+                    dockerImage = docker.build mydockerhub
+                }
+            } 
+        }
+	  stage('Push docker image') { 
+            steps { 
+                script { 
+                    docker.withRegistry( '', dockerCredentialID ) { 
+                        dockerImage.push() 
+                    }
+                } 
+            }
+        }
+
+         stage('Deploy docker containers') { 
+            steps {
+	        input(
+                  id: 'Proceed', message: 'Deploy the micro service containers?', parameters: [
+                  [$class: 'String', defaultValue: 'no', description: 'press yes or no', name: 'Proceed with deployment?']
+                 ])
+	
+                script { 
+	            sh "docker run -p 9000:80 -v ./nginx.conf:/etc/nginx/conf.d/default.conf nginx:latest"	
+		    sh "docker pull ${mydockerhub}"
+		    sh "docker stop testingapp1 testingapp2 || echo 'no apps found'"
+		    sh "docker rm -f testingapp1 testingapp2 || echo 'no apps found'"
+                    sh " docker run -itd --net sample --name testingapp1 --hostname container01 ${mydockerhub}"
+		    sh " docker run -itd --net sample --name testingapp2 --hostname container02 ${mydockerhub}"
+		    //sh "docker-compose up -d"
+                }
+            } 
+        }
+}
+}
